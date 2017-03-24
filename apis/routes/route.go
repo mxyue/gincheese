@@ -12,6 +12,7 @@ import (
 
 func RouteEngine() *gin.Engine {
 	r := gin.Default()
+
 	logfile, fileErr := os.Create("/var/log/server.log")
 	if fileErr != nil {
 		fmt.Println(fileErr)

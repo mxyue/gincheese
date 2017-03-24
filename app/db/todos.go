@@ -17,8 +17,8 @@ type Todo struct {
 }
 
 type Done struct {
-	Id    bson.ObjectId `bson:"_id"`
-	DidAt time.Time     `bson:"did_at"`
+	Id    bson.ObjectId `bson:"_id" json:"id"`
+	DidAt time.Time     `bson:"did_at" json:"did_at"`
 }
 
 func (t *Todo) AddDone(done Done) int {

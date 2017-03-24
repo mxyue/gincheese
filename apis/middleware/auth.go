@@ -2,15 +2,15 @@ package middleware
 
 import (
 	"errors"
-	"gopkg.in/gin-gonic/gin.v1"
 	"fmt"
-	"gincheese/app/util"
 	"gincheese/app/db"
+	"gincheese/app/util"
+	"gopkg.in/gin-gonic/gin.v1"
 )
 
-func Auth(c *gin.Context){
+func Auth(c *gin.Context) {
 	token, _ := c.Request.Header["Token"]
-	fmt.Println("header:",c.Request.Header["Token"][0])
+	// fmt.Println("header:",c.Request.Header["Token"][0])
 	if len(token) > 0 {
 		claims, err := util.Decrypt(token[0])
 		if err != nil || claims["user_id"] == nil {
@@ -22,18 +22,18 @@ func Auth(c *gin.Context){
 			if err != nil {
 				noAuth(c)
 			} else {
-				fmt.Println("====验证通过= userid: ",userId)
+				fmt.Println("====验证通过= userid: ", userId)
 				c.Set("userId", userId)
 				c.Next()
 			}
 		}
-	}else{
+	} else {
 		fmt.Println("token lenth: ", len(token))
 		noAuth(c)
 	}
 }
 
-func noAuth(c *gin.Context){
+func noAuth(c *gin.Context) {
 	auth_error := errors.New("验证失败")
 	c.JSON(401, gin.H{"errors": "验证失败"})
 	c.AbortWithError(401, auth_error)

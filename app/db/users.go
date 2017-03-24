@@ -42,6 +42,7 @@ func GetAllUsers() []User {
 }
 
 func FindUser(query bson.M) (user User, found bool) {
+
 	UserColl().Find(query).One(&user)
 	if user.Email == "" {
 		found = false
