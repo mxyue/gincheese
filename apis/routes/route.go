@@ -10,8 +10,7 @@ import (
 	"os"
 )
 
-func RouteEngine() *gin.Engine {
-	r := gin.Default()
+func RouteEngine(r *gin.Engine) *gin.Engine {
 
 	logfile, fileErr := os.Create("/var/log/server.log")
 	if fileErr != nil {
