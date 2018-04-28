@@ -29,6 +29,7 @@ func RouteEngine(r *gin.Engine) *gin.Engine {
 	{
 		authorized.GET("/todos", todos.List)
 		authorized.POST("/todos", todos.Create)
+		authorized.GET("/todos/:id", todos.Show)
 		authorized.DELETE("/todos/:id", todos.Delete)
 
 		authorized.POST("/todos/:id/dones", todos.CreateDone)

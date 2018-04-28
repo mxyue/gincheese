@@ -7,6 +7,8 @@ import (
 	"time"
 )
 
+//https://godoc.org/golang.org/x/crypto/bcrypt
+
 type User struct {
 	Id        bson.ObjectId `bson:"_id,omitempty"`
 	Email     string        `bson:"email"`

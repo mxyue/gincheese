@@ -2,11 +2,12 @@ package db
 
 import (
 	"fmt"
-	"gopkg.in/mgo.v2"
 	"time"
+
+	"gopkg.in/mgo.v2"
 )
 
-var db_name = "gocheese"
+var db_name = "stimulate"
 var DbSession *mgo.Session
 var url = "mongodb://localhost"
 var trying = false

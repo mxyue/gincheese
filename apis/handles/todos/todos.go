@@ -56,6 +56,21 @@ func Delete(c *gin.Context) {
 	}
 }
 
+func Show(c *gin.Context) {
+	todoId := c.Params.ByName("id")
+	if bson.IsObjectIdHex(todoId) {
+		todo, err := db.FindTodoById(todoId)
+		if err != nil {
+			fmt.Println("查询失败：", err)
+			c.JSON(601, gin.H{"error": "查询失败"})
+		} else {
+			c.JSON(http.StatusOK, todo)
+		}
+	} else {
+		c.JSON(601, gin.H{"error": "非法id"})
+	}
+}
+
 func CreateDone(c *gin.Context) {
 	did_at_string := c.PostForm("did_at")
 	todoId := c.Params.ByName("id")
