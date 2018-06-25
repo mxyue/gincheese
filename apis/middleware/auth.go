@@ -10,7 +10,7 @@ import (
 
 func Auth(c *gin.Context) {
 	token, _ := c.Request.Header["Token"]
-	// fmt.Println("header:",c.Request.Header["Token"][0])
+	fmt.Println("token:", token)
 	if len(token) > 0 {
 		claims, err := util.Decrypt(token[0])
 		if err != nil || claims["user_id"] == nil {
@@ -18,8 +18,10 @@ func Auth(c *gin.Context) {
 			noAuth(c)
 		} else {
 			userId := fmt.Sprintf("%s", claims["user_id"])
+			fmt.Println("user id", userId)
 			_, err := db.FindUserById(userId)
 			if err != nil {
+				fmt.Println(err)
 				noAuth(c)
 			} else {
 				fmt.Println("====验证通过= userid: ", userId)

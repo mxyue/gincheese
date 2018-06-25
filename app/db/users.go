@@ -46,7 +46,7 @@ func GetAllUsers() []User {
 func FindUser(query bson.M) (user User, found bool) {
 
 	UserColl().Find(query).One(&user)
-	if user.Email == "" {
+	if user.Id == "" {
 		found = false
 	} else {
 		found = true
@@ -58,7 +58,7 @@ func FindUserById(id string) (user User, err error) {
 	if bson.IsObjectIdHex(id) {
 		bsonObjectID := bson.ObjectIdHex(id)
 		UserColl().FindId(bsonObjectID).One(&user)
-		if user.Email == "" {
+		if user.Id == "" {
 			err = errors.New("用户不存在")
 		}
 		return user, err

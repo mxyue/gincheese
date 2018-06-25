@@ -27,13 +27,14 @@ func (t *Todo) AddDone(done Done) int {
 }
 
 func GetAllTodos() []Todo {
-	var todos []Todo
+	todos := make([]Todo, 0)
 	TodoColl().Find(nil).Sort("-created_at").All(&todos)
 	return todos
 }
 
 func GetUserTodos(user_id bson.ObjectId) []Todo {
-	var todos []Todo
+	todos := make([]Todo, 0)
+	fmt.Println(todos)
 	TodoColl().Find(bson.M{"user_id": user_id}).Sort("-created_at").All(&todos)
 	return todos
 }
